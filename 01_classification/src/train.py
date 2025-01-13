@@ -30,7 +30,7 @@ class PetClassifier(pl.LightningModule):
     def validation_step(self, batch, batch_idx):
         images, labels = batch
         outputs = self(images)
-        loss = F.cross_entropy(outputs, labels)
+        loss = F.binary_cross_entropy(outputs, labels)
         acc = (outputs.argmax(dim=1) == labels).float().mean()
         self.log("val_loss", loss, prog_bar=True)
         self.log("val_acc", acc, prog_bar=True)

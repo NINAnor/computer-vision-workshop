@@ -24,7 +24,7 @@ Try to look into the [documentation of torchvision transforms](https://pytorch.o
 - Are there any other augmentations which could be applied to the dataset?
 - Are there any augmentations which should not be applied to the dataset? If so, why?
 
-## 02 Model training
+## 02 Model set-up
 
 The model which has been chosen for this task is a Convolutional Neural Network (CNN). The CNN is a type of neural network which is designed to recognize patterns in images. The CNN is designed to automatically and adaptively learn spatial hierarchies of features from the data. The CNN is designed to take advantage of the 2D structure of an input image.
 
@@ -36,4 +36,20 @@ The CNN is designed to be trained on a dataset which consists of images and labe
 
 Go to: `train.py` and look at the code which trains the model.
 
-!!!!TODO: Add more tasks
+!!!!TODO: Add tasks
+
+## 03 Model training
+
+To train the model we need to define a loss function and an optimizer. The loss function is designed to measure the error between the predicted label and the true label. The optimizer is designed to minimize the error between the predicted label and the true label.
+
+The loss function which has been chosen for this task is the Binary Cross Entropy loss function. The Binary Cross Entropy loss function is designed to measure the error between the predicted label and the true label. The Binary Cross Entropy loss function is designed to be used for binary classification tasks.
+
+The optimizer which has been chosen for this task is the Adam optimizer. The Adam optimizer is designed to minimize the error between the predicted label and the true label. The Adam optimizer is designed to be used for training deep learning models.
+
+### Task 3
+
+Run the following command to train the model:
+
+```bash
+python 01_classification/src/train.py
+```
