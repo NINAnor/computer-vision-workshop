@@ -45,10 +45,6 @@ if __name__ == "__main__":
 
     # load train and validation DataLoaders
     train_loader, val_loader = get_train_val_dataloaders(data_dir, batch_size=32)
-    
-    for batch in train_loader:
-        print(batch[0].shape, batch[1])  # Print image tensor shape and labels
-        break
 
     # train the model
     model = PetClassifier(num_classes=2)

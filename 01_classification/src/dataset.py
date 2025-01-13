@@ -1,9 +1,8 @@
 import os
 from PIL import Image
-from torch.utils.data import Dataset, DataLoader, Subset
+from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 from sklearn.model_selection import train_test_split
-
 
 class PetDataset(Dataset):
     def __init__(self, image_paths, labels, transform=None):
@@ -69,7 +68,6 @@ def get_train_val_dataloaders(data_dir, batch_size=16, val_split=0.2, num_worker
     # define transforms/augmentations
     transform_train = transforms.Compose([
         transforms.Resize((128, 128)),
-        transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
@@ -79,14 +77,9 @@ def get_train_val_dataloaders(data_dir, batch_size=16, val_split=0.2, num_worker
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
 
-    # create datasets
     train_dataset = PetDataset(train_paths, train_labels, transform=transform_train)
     val_dataset = PetDataset(val_paths, val_labels, transform=transform_val)
     
-    print(f"Training samples: {len(train_dataset)}")
-    print(f"Validation samples: {len(val_dataset)}")
-
-    # create DataLoaders
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
