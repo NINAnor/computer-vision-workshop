@@ -1,8 +1,11 @@
 import os
+
 from PIL import Image
-from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms
 from sklearn.model_selection import train_test_split
+from tabulate import tabulate
+from torch.utils.data import DataLoader, Dataset
+from torchvision import transforms
+
 
 class PetDataset(Dataset):
     def __init__(self, image_paths, labels, transform=None):
@@ -24,17 +27,19 @@ class PetDataset(Dataset):
         label = self.labels[idx]
         try:
             image = Image.open(img_path).convert("RGB")
-        except Exception as e:
+        except Exception:
             print(f"Skipping corrupted image: {img_path}")
             return self.__getitem__((idx + 1) % len(self.image_paths))
-        
+
         if self.transform:
             image = self.transform(image)
-        
+
         return image, label
 
 
-def get_train_val_dataloaders(data_dir, batch_size=16, val_split=0.2, num_workers=8):
+def get_train_val_dataloaders(
+    logger, data_dir, batch_size=16, val_split=0.2, num_workers=8
+):
     """
     Splits the dataset into training and validation sets and returns DataLoaders.
 
@@ -56,31 +61,55 @@ def get_train_val_dataloaders(data_dir, batch_size=16, val_split=0.2, num_worker
         folder_path = os.path.join(data_dir, label)
         for img_name in os.listdir(folder_path):
             img_path = os.path.join(folder_path, img_name)
-            if os.path.isfile(img_path):  # Ensure it's a file
+            if os.path.isfile(img_path):  # ensure the file exists
                 image_paths.append(img_path)
                 labels.append(idx)
+
+    # take half the data for faster training
+    image_paths = image_paths[: len(image_paths) // 2]
+    labels = labels[: len(labels) // 2]
+    # dataset statistics
+    total_images = len(image_paths)
+    class_counts = {label: labels.count(idx) for label, idx in class_to_idx.items()}
+
+    # print statistics in a table
+    stats_table = [
+        ["Total Images", total_images],
+        *[[label, count] for label, count in class_counts.items()],
+    ]
+    logger.info(
+        f"\n{tabulate(stats_table, headers=['Class', 'Count'], tablefmt='grid')}"
+    )
 
     # split the dataset into training and validation sets
     train_paths, val_paths, train_labels, val_labels = train_test_split(
         image_paths, labels, test_size=val_split, stratify=labels, random_state=42
     )
 
-    # define transforms/augmentations
-    transform_train = transforms.Compose([
-        transforms.Resize((128, 128)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
-    transform_val = transforms.Compose([
-        transforms.Resize((128, 128)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
+    # define transforms/augmentations for both the training and validation sets
+    transform_train = transforms.Compose(
+        [
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]
+    )
+    transform_val = transforms.Compose(
+        [
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]
+    )
 
     train_dataset = PetDataset(train_paths, train_labels, transform=transform_train)
     val_dataset = PetDataset(val_paths, val_labels, transform=transform_val)
-    
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
-    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+
+    train_loader = DataLoader(
+        train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers
+    )
+    val_loader = DataLoader(
+        val_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers
+    )
 
     return train_loader, val_loader
