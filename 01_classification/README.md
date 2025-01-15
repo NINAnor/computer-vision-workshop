@@ -9,7 +9,8 @@ It is important to note that the task of classification assumes that the image c
 
 ## 01 Dataset information
 
-The dataset which has been chosen can be found [here](https://www.kaggle.com/datasets/shaunthesheep/microsoft-catsvsdogs-dataset). Inside the folder `PetImages` there are two folders which is called `Cat` and `Dog`. This is all the information we need to prepare the dataset for training.
+The dataset which has been chosen can be found [here](https://www.kaggle.com/datasets/shaunthesheep/microsoft-catsvsdogs-dataset). The dataset consists of 25.000 images of cats and dogs.
+Inside the folder `PetImages` there are two folders which is called `Cat` and `Dog`. The dataset is split into two folders: `Cat` and `Dog`. Inside the folder `Cat` there are 12.500 images of cats and inside the folder `Dog` there are 12.500 images of dogs.
 
 In computer vision there is something called augmentations and/or transformations. The purpose with transformations is to augment the dataset in order to increase the generalization of the model. This is done by applying random transformations to the images in the dataset. The transformations can be applied to the training dataset, but not to the validation dataset. The validation dataset should be kept as close to the original dataset as possible.
 
@@ -34,7 +35,7 @@ The CNN is designed to be trained on a dataset which consists of images and labe
 
 ### Task 2
 
-Go to: `train.py` and look at the code which trains the model.
+Go to: `main.py` and look at the code which trains the model.
 
 !!!!TODO: Add tasks
 
@@ -51,5 +52,5 @@ The optimizer which has been chosen for this task is the Adam optimizer. The Ada
 Run the following command to train the model:
 
 ```bash
-python 01_classification/src/train.py
+python 01_classification/src/main.py
 ```
