@@ -1,0 +1,14 @@
+# Changes here will be overwritten by Copier
+_commit: v0.0.1
+_src_path: gh:ninanor/python-template
+author_name: taheeraahmed
+debug: false
+default_branch_name: main
+docker: false
+email: taheera.ahmed@nina.no
+project_name: computervision_workshop
+project_slug: computervision_workshop
+repo_name: computervision_workshop
+repo_org: ninanor
+template_type: python
+type_annotations: false
