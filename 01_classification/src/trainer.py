@@ -1,6 +1,6 @@
-from lightning.pytorch import LightningModule
 import torch.nn as nn
 import torch.nn.functional as F
+from lightning.pytorch import LightningModule
 from torch.optim import Adam
 
 
@@ -11,15 +11,16 @@ class PetClassifier(LightningModule):
 
         # define the model
         self.model = nn.Sequential(
-            nn.Conv2d(
-                3, 16, kernel_size=7, stride=2, padding=3
-            ),  # Larger kernel, reduce initial spatial size
+            nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2, stride=2),  # Reduce spatial size further
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2),
             nn.Flatten(),
-            nn.Linear(16 * 56 * 56, 64),  # Fewer units in the fully connected layer
+            nn.Linear(32 * 56 * 56, 128),
             nn.ReLU(),
-            nn.Linear(64, num_classes),  # Output layer
+            nn.Linear(128, num_classes),
         )
 
     def forward(self, x):
