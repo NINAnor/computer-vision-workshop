@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "computer-vision-workshop"
+version = "0.1.0"
+description = ""
+authors = ["Taheera Ahmed <taheera.ahmed@nina.no>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torchvision = "^0.20.1"
+scikit-learn = "^1.6.1"
+lightning = "2.4.0"
+torch-tb-profiler = "^0.4.3"
+tabulate = "^0.9.0"
+gradio = "^5.12.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
