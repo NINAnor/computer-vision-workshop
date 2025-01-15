@@ -8,13 +8,13 @@ from trainer import PetClassifier
 
 if __name__ == "__main__":
     # dataset path
-    data_dir = "/home/taheera.ahmed/code/computer-vision-workshop/01_classification/data/PetImages"
+    data_dir = "01_classification/data/PetImages" # TODO: change this if you have the dataset in a different location
     logging.basicConfig(
         level=logging.INFO,
         format="[%(levelname)s] %(asctime)s - %(message)s",
         handlers=[
             logging.FileHandler(
-                "/home/taheera.ahmed/code/computer-vision-workshop/newfile.log",
+                "01_classification/log.log",
                 mode="w",
             ),
             logging.StreamHandler(),
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     logger.info(f"CUDNN version: {torch.backends.cudnn.version()}")
 
     train_loader, val_loader = get_train_val_dataloaders(
-        logger, data_dir, batch_size=4, num_workers=4
+        logger, data_dir, batch_size=4, num_workers=8
     )
 
 
@@ -46,6 +46,8 @@ if __name__ == "__main__":
         accelerator="cpu", # TODO: Change to "gpu" for GPU training
         logger=True,
         log_every_n_steps=1,
-        callbacks=[early_stopping, model_checkpoint]
+        callbacks=[early_stopping, model_checkpoint],
+        fast_dev_run=True,
     )
     trainer.fit(model, train_loader, val_loader)
+    logger.info("Training completed.")
