@@ -31,6 +31,8 @@ class PetClassifier(LightningModule):
         labels = labels.squeeze()
         outputs = self(images)
         loss = F.cross_entropy(outputs, labels)
+        acc = (outputs.argmax(dim=1) == labels).float().mean()
+        self.log("train_acc", acc)
         self.log("train_loss", loss)
         return loss
 
