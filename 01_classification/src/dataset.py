@@ -65,9 +65,6 @@ def get_train_val_dataloaders(
                 image_paths.append(img_path)
                 labels.append(idx)
 
-    # take half the data for faster training
-    image_paths = image_paths[: len(image_paths) // 2]
-    labels = labels[: len(labels) // 2]
     # dataset statistics
     total_images = len(image_paths)
     class_counts = {label: labels.count(idx) for label, idx in class_to_idx.items()}
@@ -83,7 +80,7 @@ def get_train_val_dataloaders(
 
     # split the dataset into training and validation sets
     train_paths, val_paths, train_labels, val_labels = train_test_split(
-        image_paths, labels, test_size=val_split, stratify=labels, random_state=42
+        image_paths, labels, test_size=val_split, random_state=42
     )
 
     # define transforms/augmentations for both the training and validation sets

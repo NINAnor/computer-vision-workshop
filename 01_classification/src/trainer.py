@@ -28,6 +28,7 @@ class PetClassifier(LightningModule):
 
     def training_step(self, batch, batch_idx):
         images, labels = batch
+        labels = labels.squeeze()
         outputs = self(images)
         loss = F.cross_entropy(outputs, labels)
         self.log("train_loss", loss)
