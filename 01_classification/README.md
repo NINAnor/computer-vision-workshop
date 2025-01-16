@@ -29,9 +29,55 @@ Try to look into the [documentation of torchvision transforms](https://pytorch.o
 
 The model which has been chosen for this task is a Convolutional Neural Network (CNN). The CNN is a type of neural network which is designed to recognize patterns in images. The CNN is designed to automatically and adaptively learn spatial hierarchies of features from the data. The CNN is designed to take advantage of the 2D structure of an input image.
 
-The CNN consists of multiple layers which are designed to extract features from the input image. The first layer is designed to extract low-level features such as edges and corners. The following layers are designed to extract higher-level features such as shapes and objects.
+The training process is done by feeding the input image into the model and predicting a label. The predicted label is then compared to the true label. The error between the predicted label and the true label is then minimized by updating the weights of the model. The weights can be initialized randomly and will be updated during the training process. By using a process called backpropagation the weights will be updated accordingly.
 
-The CNN is designed to be trained on a dataset which consists of images and labels. The CNN is designed to learn the relationship between the input image and the label. The CNN is designed to minimize the error between the predicted label and the true label.
+The model we have chosen is a simple CNN with the following architecture:
+![model-architecture](../assets/classification-architecture.svg)
+
+In code it looks like this, the model itself is defined in `trainer.py`:
+
+```python
+self.model = nn.Sequential(
+    nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=2, stride=2),
+    nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1),
+    nn.ReLU(),
+    nn.MaxPool2d(kernel_size=2, stride=2),
+    nn.Flatten(),
+    nn.Linear(32 * 56 * 56, 128),
+    nn.ReLU(),
+    nn.Linear(128, num_classes),
+)
+```
+
+1. First layer (`Conv2D`):
+
+- Looks for small patterns in the image using 16 "filters." Each filter captures features like edges or textures.
+- The `ReLU` activation makes sure the output is non-negative (it removes negative values).
+- Then, it downsamples (shrinks) the image by half using a MaxPool layer, keeping only the most important details in small regions.
+
+2. Second layer (another `Conv2D`):
+
+- Adds more filters (32 this time) to detect more complex features, like shapes or patterns.
+- Again, it applies `ReLU` to keep the outputs positive and shrinks the image further using another MaxPool.
+
+3. Flatten:
+
+- At this point, the image is no longer treated as a grid. It’s flattened into a long list of numbers (like unrolling a rug) so it can be passed into fully connected layers.
+
+4. First Dense Layer (`Linear`):
+
+- Takes the long list of numbers and reduces it to 128 features. These are like a summary of what the model has learned about the image so far.
+- Another `ReLU` makes sure everything stays positive.
+
+5. Output Layer (`Linear`):
+
+- Finally, it reduces the 128 features to num_classes (e.g., 2 if it’s a binary classification). This gives the scores for each class.
+
+6. Result:
+
+- The model predicts which class the image most likely belongs to based on these scores.
 
 ### Task 2
 
