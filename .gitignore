@@ -6,3 +6,5 @@ __pycache__/
 *.pt
 *.log
 train_logs/
+*.log
+train/
