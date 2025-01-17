@@ -6,16 +6,18 @@ from lightning.pytorch import Trainer
 from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
 from pytorch_lightning.loggers import TensorBoardLogger
 from trainer import PetClassifier
+import hydra
 
-if __name__ == "__main__":
+@hydra.main(version_base=None, config_path=".", config_name="config")
+def main(cfg):
     # dataset path
-    data_dir = "01_classification/data/PetImages"  # TODO: change this if you have the dataset in a different location
+    data_dir = cfg.DATA_PATH
     logging.basicConfig(
         level=logging.INFO,
         format="[%(levelname)s] %(asctime)s - %(message)s",
         handlers=[
             logging.FileHandler(
-                "01_classification/log.log",
+                "main.log",
                 mode="w",
             ),
             logging.StreamHandler(),
@@ -27,7 +29,7 @@ if __name__ == "__main__":
     logger.info(f"CUDNN version: {torch.backends.cudnn.version()}")
 
     train_loader, val_loader = get_train_val_dataloaders(
-        logger, data_dir, batch_size=4, num_workers=8
+        logger, data_dir, batch_size=cfg.BATCH_SIZE, num_workers=cfg.NUM_WORKERS
     )
 
     # define callbacks
@@ -41,14 +43,19 @@ if __name__ == "__main__":
     )
 
     # train the model
-    model = PetClassifier(num_classes=2)
+    model = PetClassifier(num_classes=cfg.NUM_CLASSES)
 
     trainer = Trainer(
-        max_epochs=10,
-        accelerator="cpu",  # TODO: Change to "gpu" for GPU training
+        max_epochs=cfg.MAX_EPOCH,
+        accelerator=cfg.ACCELERATOR,  # TODO: Change to "gpu" for GPU training
         log_every_n_steps=1,
         callbacks=[early_stopping, model_checkpoint],
         logger=custom_logger,
     )
     trainer.fit(model, train_loader, val_loader)
     logger.info("Training completed.")
+
+
+if __name__ == "__main__":
+    main()
+

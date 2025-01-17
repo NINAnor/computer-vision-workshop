@@ -1,0 +1,12 @@
+DATA_PATH: "/home/benjamin.cretois/Code/computer-vision-workshop/data/cat-dog/PetImages"
+BATCH_SIZE: 8
+NUM_WORKERS: 4
+MAX_EPOCH: 10
+ACCELERATOR: "cpu"
+NUM_CLASSES: 2 # cats and dogs
+
+
+# Hydra parameters
+hydra:
+  run:
+    dir: .
