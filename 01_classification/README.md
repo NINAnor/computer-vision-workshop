@@ -100,3 +100,19 @@ Run the following command to train the model:
 ```bash
 python 01_classification/src/main.py
 ```
+
+# TODO: add more tasks
+
+## 04 Model evaluation
+
+To evalute the model we use a tool called Tensorboard. Tensorboard is a tool which is designed to visualize the training process of a deep learning model. Tensorboard is designed to show the loss and accuracy of the model during the training process, which we have been logging in `trainer.py`.
+
+To start Tensorboard run the following command:
+
+```bash
+tensorboard --logdir=01_classification/lightnings_logs
+```
+
+Then open a browser and go to `http://localhost:6006/` to see the training process of the model.
+
+TODO: add more tasks

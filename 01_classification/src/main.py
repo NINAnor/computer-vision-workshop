@@ -7,6 +7,10 @@ from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
 from pytorch_lightning.loggers import TensorBoardLogger
 from trainer import PetClassifier
 
+torch.manual_seed(0)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = True
+
 if __name__ == "__main__":
     # dataset path
     data_dir = "01_classification/data/PetImages"  # TODO: change this if you have the dataset in a different location
@@ -31,7 +35,10 @@ if __name__ == "__main__":
     )
 
     # define callbacks
-    early_stopping = EarlyStopping("val_loss")  # monitor the validation loss
+    # monitor the validation loss
+    early_stopping = EarlyStopping(
+        "val_loss", patience=2
+    )  
     model_checkpoint = ModelCheckpoint(
         monitor="val_loss",
         filename="best_model",
@@ -45,7 +52,7 @@ if __name__ == "__main__":
 
     trainer = Trainer(
         max_epochs=10,
-        accelerator="cpu",  # TODO: Change to "gpu" for GPU training
+        accelerator="gpu",  # change to "cpu" if no gpu available
         log_every_n_steps=1,
         callbacks=[early_stopping, model_checkpoint],
         logger=custom_logger,
