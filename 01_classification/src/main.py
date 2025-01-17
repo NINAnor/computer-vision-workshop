@@ -8,11 +8,6 @@ from pytorch_lightning.loggers import TensorBoardLogger
 from trainer import PetClassifier
 import hydra
 
-torch.manual_seed(0)
-torch.backends.cudnn.deterministic = True
-torch.backends.cudnn.benchmark = True
-
-if __name__ == "__main__":
 @hydra.main(version_base=None, config_path=".", config_name="config")
 def main(cfg):
     # dataset path
