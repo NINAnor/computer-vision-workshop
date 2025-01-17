@@ -81,9 +81,8 @@ self.model = nn.Sequential(
 
 ### Task 2
 
-Go to: `main.py` and look at the code which trains the model.
+Go to: `main.py` and look at the code which trains the model. You will see that there is reference to a `config` file. Open the `config.yaml` and have a look at the parameters. What do you think they do and if you change them, what do you think would be the influence on model training?
 
-!!!!TODO: Add tasks
 
 ## 03 Model training
 
