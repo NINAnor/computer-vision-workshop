@@ -19,6 +19,7 @@ ultralytics = "^8.3.62"
 hydra-core = "^1.3.2"
 ultralytics = "^8.3.62"
 hydra-core = "^1.3.2"
+ultralytics = "^8.3.62"
 
 
 [tool.poetry.group.dev.dependencies]
