@@ -1,5 +1,8 @@
 data/
 lightning_logs/
+__pycache__/
 *.pyc
+*.ipynb_checkpoints/
+*.pt
 *.log
-train/
+train_logs/
