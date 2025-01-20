@@ -1,0 +1,24 @@
+#################################
+############ DATASET ############
+#################################
+
+# Data path for training
+MASKS_DIR: "/home/benjamin.cretois/data/cv_workshop/TRAIN_VAL_SET/MASKS"
+IMG_DIR: "/home/benjamin.cretois/data/cv_workshop/TRAIN_VAL_SET/IMAGES"
+
+# Data path for testing
+PRED_TEST_MASKS: "/home/benjamin.cretois/data/cv_workshop/TEST_SET/PRED_MASKS"
+GT_TEST_MASKS: "/home/benjamin.cretois/data/cv_workshop/TEST_SET/GT_MASKS"
+
+################################
+########### TRAINING ###########
+################################
+
+NUM_WORKERS: 4
+NUM_CLASSES: 8
+NUM_EPOCHS: 1000
+BATCH_SIZE: 16
+LR: 0.0001
+
+# Callbacks
+PATIENCE: 7 
