@@ -1,10 +1,11 @@
-data/
-lightning_logs/
-__pycache__/
 *.pyc
 *.ipynb_checkpoints/
 *.pt
 *.log
+
+data/
+lightning_logs/
+__pycache__/
 train_logs/
-*.log
+outputs/
 train/
