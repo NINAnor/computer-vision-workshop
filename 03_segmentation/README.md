@@ -1,6 +1,6 @@
 # Part 1: Computer Vision for Image Segmentation
 
-![example-segmentation-images](../assets/segmentation_examples.png)
+![example-segmentation-images](../assets/segmentation_on_satellite.png)
 
 ## 00 Introduction
 
@@ -12,7 +12,7 @@ For example, given an image of a cat and a dog, the model will generate a mask h
 
 ## 01 Dataset Information
 
-The dataset chosen for this workshop can be found [here](https://www.kaggle.com/datasets/). It contains images and corresponding pixel-level annotations (masks) for various object categories. Each image is paired with a segmentation mask that labels pixels as belonging to specific objects or background.
+The dataset chosen for this workshop can be found [here](https://www.kaggle.com/datasets/). It contains satellite images and corresponding pixel-level annotations (masks) for various object categories mentioned in the `label_mapping.json`. Each image is paired with a segmentation mask that labels pixels as belonging to specific objects or background.
 
 The dataset is organized as follows:
 
@@ -41,11 +41,11 @@ The model chosen for this task is **DeepLabV3 with a ResNet-50 backbone**, a pow
 
 The architecture consists of:
 
-1. Feature Extractor (ResNet-50 backbone): Captures hierarchical features from the image at multiple levels.
+1. **Feature Extractor (ResNet-50 backbone):** Captures hierarchical features from the image at multiple levels.
 
-2. Atrous Spatial Pyramid Pooling (ASPP): Uses dilated convolutions to capture information at different scales.
+2. **Atrous Spatial Pyramid Pooling (ASPP):** Uses dilated convolutions to capture information at different scales.
 
-3. Classifier: Outputs the final segmentation map by applying a 1x1 convolution to predict pixel-level class labels.
+3. **Classifier:** Outputs the final segmentation map by applying a 1x1 convolution to predict pixel-level class labels.
 
 Here’s how the model is initialized in the code (defined in main.py):
 
@@ -69,41 +69,37 @@ To train the model, we need:
 
 ### Task 3
 
-Review main.py and examine how the model is trained. Pay attention to:
-
-    The use of the config.yaml file for setting hyperparameters (e.g., learning rate, batch size, number of epochs).
-    Can you explain why we are using the cross entropy loss function? `F.cross_entropy(outputs, masks, ignore_index=-1)`
-
-### Task 4
-
 Run the following command to train the model:
 
 ```
-python 01_segmentation/src/main.py
+poetry run python src/main.py
 ```
 
-Once training is complete, review the saved model and segmentation results.
+Once training is complete, review the results on `tensorboard`.
+
+### Task 4
+
+Review `main.py` and examine how the model is trained. Pay attention to:
+
+    The use of the config.yaml file for setting hyperparameters (e.g., learning rate, batch size, number of epochs).
+    Change some of the transforms and see how it influences model performance
+
 
 ## 04 Evaluation and Visualization
 
-After training, the model can be evaluated on a test set. Metrics such as Intersection over Union (IoU) or Dice Coefficient are used to assess segmentation performance.
+After training, the model can be evaluated on a **test set**. Metrics such as Intersection over Union (IoU) can be used to assess segmentation performance. IoU (also referred to as the Jaccard Index) calculates the amount of overlapping between two bounding boxes — a predicted bounding box and a ground truth bounding box.
 
-Additionally, the predicted masks can be visualized alongside their corresponding input images and ground truth masks.
+<img src="../assets/iou.avif" alt="Intersection over Union" width="400"/>
+*Image taken from https://www.v7labs.com/blog/intersection-over-union-guide*
+
+Additionally, the predicted masks can be visualized alongside their corresponding input images and ground truth masks. The latter can be done by running `app.py`:
+
+```bash
+poetry run python app.py
+```
 
 ### Task 5
 
-Open evaluation.py and explore how the model's performance is evaluated. Visualize some predictions using visualize_results.py to understand how well the model performs on unseen data.
-
-For example, you can run:
-
-```
-python 01_segmentation/src/evaluation.py
-```
-
-This will generate side-by-side visualizations of:
-
-    Input images
-    Ground truth masks
-    Predicted masks
-
 Examine the results to identify areas where the model performs well or struggles (e.g., edges, small objects).
+
+What are some modifications you could add to the pipeline for the model to perform better?

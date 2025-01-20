@@ -15,7 +15,7 @@ GT_TEST_MASKS: "/home/benjamin.cretois/data/cv_workshop/TEST_SET/GT_MASKS"
 ################################
 
 NUM_WORKERS: 4
-NUM_CLASSES: 8
+NUM_CLASSES: 7
 NUM_EPOCHS: 1000
 BATCH_SIZE: 16
 LR: 0.0001

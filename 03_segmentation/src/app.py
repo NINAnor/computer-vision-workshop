@@ -22,7 +22,7 @@ def load_model(checkpoint_path, num_classes):
     return model
 
 # Load trained model
-model = load_model("path/to/your/model_checkpoint.pth", num_classes=2)
+model = load_model("/home/benjamin.cretois/Code/computer-vision-workshop/lightning_logs/version_1/checkpoints/epoch=27-step=476.ckpt", num_classes=8)
 
 # Define preprocessing function
 def preprocess_image(image):
@@ -33,6 +33,26 @@ def preprocess_image(image):
     input_tensor = preprocess(image).unsqueeze(0)
     return input_tensor
 
+# Define a colormap for the 8 categories
+def apply_colormap(predicted_mask):
+    # Define colors for each class (8 classes)
+    colors = [
+        (0, 0, 0),       # Black - "innendørs"
+        (255, 0, 0),     # Red - "parkering/sykkelstativ"
+        (0, 255, 0),     # Green - "asfalt/betong"
+        (0, 0, 255),     # Blue - "gummifelt/kunstgress"
+        (255, 255, 0),   # Yellow - "sand/stein"
+        (255, 0, 255),   # Magenta - "gress"
+        (0, 255, 255),   # Cyan - "trær"
+    ]
+
+    # Convert class indices to RGB colors
+    colored_mask = np.zeros((predicted_mask.shape[0], predicted_mask.shape[1], 3), dtype=np.uint8)
+    for class_id, color in enumerate(colors):
+        colored_mask[predicted_mask == class_id] = color
+
+    return Image.fromarray(colored_mask)
+
 # Prediction function for Gradio
 def predict(image):
     input_tensor = preprocess_image(image)
@@ -40,14 +60,17 @@ def predict(image):
     with torch.no_grad():
         output = model(input_tensor)["out"]
 
-    # Get predicted mask
+    # Get predicted mask (class-wise)
     predicted_mask = torch.argmax(output.squeeze(), dim=0).cpu().numpy()
 
-    # Convert mask to image format
-    predicted_mask_image = Image.fromarray((predicted_mask * 255).astype(np.uint8))
-    predicted_mask_image = predicted_mask_image.resize(image.size, Image.NEAREST)
+    # Apply colormap to predicted mask
+    colored_mask = apply_colormap(predicted_mask)
 
-    return predicted_mask_image
+    # Resize the mask to match the input image size
+    colored_mask = colored_mask.resize(image.size, Image.NEAREST)
+
+    return colored_mask
+
 
 # Gradio interface
 iface = gr.Interface(
