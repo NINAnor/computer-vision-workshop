@@ -99,3 +99,31 @@ Run the following command to train the model:
 ```bash
 python 01_classification/src/main.py
 ```
+
+# TODO: add more tasks
+
+## 04 Model evaluation
+
+To evalute the model we use a tool called Tensorboard. Tensorboard is a tool which is designed to visualize the training process of a deep learning model. Tensorboard is designed to show the loss and accuracy of the model during the training process, which we have been logging in `trainer.py`.
+
+To start Tensorboard run the following command:
+
+```bash
+tensorboard --logdir=01_classification/lightnings_logs
+```
+
+Then open a browser and go to `http://localhost:6006/` to see the training process of the model.
+
+TODO: add more tasks
+
+## 05 Model inference
+
+To make predictions with the model we have to load the model and pass an image to the model. The model will then predict a label for the image. Luckily there is a Python library which allows for easy "playing around with the model" in a web browser, which is called `Gradio`. Gradio is a Python library which is designed to create web interfaces for machine learning models.
+
+The code for this part is located in `app.py`. To start the web interface run the following command:
+
+```bash
+python 01_classification/src/app.py
+```
+
+Then open a browser and go to `http://localhost:7860/` to see the web interface. First you need to add the model path, which is a `*.pt`-file. If you then upload an image of a cat or a dog the model will predict if the image contains a cat or a dog.
