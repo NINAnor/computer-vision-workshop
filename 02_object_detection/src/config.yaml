@@ -1,0 +1,2 @@
+DATASET_PATH: "02_object_detection/data/aquarium_pretrain"
+MODEL_PATH: "/home/taheera.ahmed/code/computer-vision-workshop/02_object_detection/train_logs/train/weights/best.pt"

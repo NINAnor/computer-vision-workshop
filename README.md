@@ -32,4 +32,10 @@ When this has succeeded and downloaded all the required libraries, you can activ
 poetry shell
 ```
 
+Or you can run the following command to install the required libraries:
+
+```bash
+source .venv/bin/activate
+```
+
 Now you are ready to start the workshop!

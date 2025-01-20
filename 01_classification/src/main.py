@@ -33,7 +33,10 @@ def main(cfg):
     )
 
     # define callbacks
-    early_stopping = EarlyStopping("val_loss")  # monitor the validation loss
+    # monitor the validation loss
+    early_stopping = EarlyStopping(
+        "val_loss", patience=2
+    )  
     model_checkpoint = ModelCheckpoint(
         monitor="val_loss",
         filename="best_model",
