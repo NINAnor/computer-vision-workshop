@@ -9,10 +9,16 @@ It is important to note that the task of classification assumes that the image c
 
 ## 01 Dataset information
 
-The dataset which has been chosen can be found [here](https://www.kaggle.com/datasets/shaunthesheep/microsoft-catsvsdogs-dataset). The dataset consists of 25.000 images of cats and dogs.
+![how to download dataset](../assets/how-to-download-dataset.png)
+
+The dataset which has been chosen can be found [here](https://www.kaggle.com/datasets/shaunthesheep/microsoft-catsvsdogs-dataset). To download the dataset, you can click on the link, and click "Download" which is to the right. Afterwards, click "Download dataset as zip". Unzip the file, and add it to the JupyterHub environment.
+
+The dataset consists of 25.000 images of cats and dogs.
 Inside the folder `PetImages` there are two folders which is called `Cat` and `Dog`. The dataset is split into two folders: `Cat` and `Dog`. Inside the folder `Cat` there are 12.500 images of cats and inside the folder `Dog` there are 12.500 images of dogs.
 
 In computer vision there is something called augmentations and/or transformations. The purpose with transformations is to augment the dataset in order to increase the generalization of the model. This is done by applying random transformations to the images in the dataset. The transformations can be applied to the training dataset, but not to the validation dataset. The validation dataset should be kept as close to the original dataset as possible.
+
+This technique of is a commonly used in computer vision tasks, and has proven to have a large impact on the performance of the model. The transformations can be applied to the dataset in different ways, such as flipping the image horizontally or vertically, rotating the image, changing the brightness of the image, etc.
 
 ### Task 1
 
