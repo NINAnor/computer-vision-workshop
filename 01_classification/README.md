@@ -9,10 +9,6 @@ It is important to note that the task of classification assumes that the image c
 
 ## 01 Dataset information
 
-![how to download dataset](../assets/how-to-download-dataset.png)
-
-The dataset which has been chosen can be found [here](https://www.kaggle.com/datasets/shaunthesheep/microsoft-catsvsdogs-dataset). To download the dataset, you can click on the link, and click "Download" which is to the right. Afterwards, click "Download dataset as zip". Unzip the file, and add it to the JupyterHub environment.
-
 The dataset consists of 25.000 images of cats and dogs.
 Inside the folder `PetImages` there are two folders which is called `Cat` and `Dog`. The dataset is split into two folders: `Cat` and `Dog`. Inside the folder `Cat` there are 12.500 images of cats and inside the folder `Dog` there are 12.500 images of dogs.
 
