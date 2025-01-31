@@ -42,16 +42,11 @@ Please don't be afraid to ask questions if you are stuck or if you need help. We
 
 Aka. how to set up the development environment.
 
-Before we can get started, we need to install the required Python libraries. We are going to use a Python library called Poetry to manage the dependencies for this project.You can do this by running the following command:
+Before we get started we must activate the correct Python environment. This is to ensure we have downloaded all the necessary Python libraries. We have already created a Python environment for you, so you don't have to worry about that.
+
+1. Open a terminal in JupyterLab by clicking on the `+` sign in the top left corner and then click on `Terminal`.
+2. Run the following command to activate the correct Python environment:
 
 ```bash
-poetry install
+source /data/scratch/.computer-vision-ws-venv/bin/activate
 ```
-
-When this has succeeded and downloaded all the required libraries, you can activate the virtual environment by running the following command:
-
-```bash
-poetry shell
-```
-
-Now you are ready to start the workshop!

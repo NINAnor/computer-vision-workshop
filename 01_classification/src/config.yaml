@@ -1,4 +1,4 @@
-DATA_PATH: "/home/benjamin.cretois/Code/computer-vision-workshop/data/cat-dog/PetImages"
+DATA_PATH: "/data/P-Prosjekter2/154012_monitoring_natural_habitat_loss_in_norway_with_cop/cv-dl-workshop/01-classification/PetImages"
 BATCH_SIZE: 8
 NUM_WORKERS: 4
 MAX_EPOCH: 10
