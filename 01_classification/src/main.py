@@ -1,3 +1,5 @@
+#!/usr/env/bin python3
+
 import logging
 
 import torch
@@ -47,6 +49,7 @@ def main(cfg):
 
     # train the model
     model = PetClassifier(num_classes=cfg.NUM_CLASSES)
+    logger.info(model)
 
     trainer = Trainer(
         max_epochs=cfg.MAX_EPOCH,

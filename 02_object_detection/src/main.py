@@ -21,8 +21,5 @@ def main(cfg):
         workers=8,
     )
 
-    # TODO: check up for data augmentation and other hhy
-
-
 if __name__ == "__main__":
     main()

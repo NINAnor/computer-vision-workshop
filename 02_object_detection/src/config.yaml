@@ -1,2 +1,2 @@
-DATASET_PATH: "02_object_detection/data/aquarium_pretrain"
-MODEL_PATH: "/home/taheera.ahmed/code/computer-vision-workshop/02_object_detection/train_logs/train/weights/best.pt"
+DATA_PATH: "/data/P-Prosjekter2/154012_monitoring_natural_habitat_loss_in_norway_with_cop/cv-dl-workshop/02-object-detection/aquarium_pretrain"
+MODEL_PATH: "path/to/best/model/best.pt"
