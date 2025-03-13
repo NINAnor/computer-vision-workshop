@@ -21,37 +21,18 @@ Please don't be afraid to ask questions if you are stuck or if you need help. We
 ## Set-up
 
 ### How to get the code
+This will copy the files we have made to your home at jupyterhub.
 
-1. You can download the code for this workshop by manually downloading the code here, look for the green button which says `Code` on the top of this page and click on it. Then click on `Download ZIP`.
-
-![download-code](assets/download_code.png)
-
-2. Unzip the file
-
-3. Go to [https://jupyterhub.nina.no/](https://jupyterhub.nina.no/) and log in with your username and password.
-
-4. Find the small upload button in the top left corner of the JupyterLab interface. Click on the upload button and upload the unzipped file to the JupyterLab environment.
-
-![example-image-uploading-code](assets/upload_files_jupyter_hub.png)
-
-5. You should now have folder in JupyterLab which is named `computer-vision-workshop`. You can now continue with setting up the development environment.
-
-![example-image-folder-structure](assets/jupyterhub_set_up.png)
+```bash
+cp /data/scratch/computer-vision-workshop ./ -r
+```
 
 ### How to run the code
 
 Aka. how to set up the development environment.
 
-Before we can get started, we need to install the required Python libraries. We are going to use a Python library called Poetry to manage the dependencies for this project.You can do this by running the following command:
+We have fixed the python environment for you, so to activate the environment do: 
 
 ```bash
-poetry install
+source /data/scratch/.computer-vision-ws-venv/bin/activate
 ```
-
-When this has succeeded and downloaded all the required libraries, you can activate the virtual environment by running the following command:
-
-```bash
-poetry shell
-```
-
-Now you are ready to start the workshop!
