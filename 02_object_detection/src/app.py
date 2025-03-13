@@ -8,7 +8,7 @@ from ultralytics import YOLO
 
 @hydra.main(version_base=None, config_path=".", config_name="config")
 def main(cfg: DictConfig):
-    # Extract paths from the config file
+    # extract paths from the config file
     model_path = cfg.MODEL_PATH
     dataset_path = Path(cfg.DATASET_PATH)
 
@@ -27,7 +27,7 @@ def main(cfg: DictConfig):
         example_images = list(test_images_path.glob("*.jpg"))[:10]
         return [str(img) for img in example_images]
 
-    # Gradio interface
+    # gradio interface
     with gr.Blocks() as demo:
         gr.Markdown("# YOLO Model Inference")
 
