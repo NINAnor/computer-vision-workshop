@@ -31,7 +31,10 @@ cp /data/scratch/computer-vision-workshop ./ -r
 
 Aka. how to set up the development environment.
 
-We have fixed the python environment for you, so to activate the environment do: 
+Before we get started we must activate the correct Python environment. This is to ensure we have downloaded all the necessary Python libraries. We have already created a Python environment for you, so you don't have to worry about that.
+
+1. Open a terminal in JupyterLab by clicking on the `+` sign in the top left corner and then click on `Terminal`.
+2. Run the following command to activate the correct Python environment:
 
 ```bash
 source /data/scratch/.computer-vision-ws-venv/bin/activate
